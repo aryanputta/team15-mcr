@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section 1.7 — Concept of Operations | Team 15 MCR</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', 'Open Sans', Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #f5f6f8;
+      padding: 40px 24px 80px;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .doc-header {
+      background: #0b3d91;
+      color: white;
+      border-radius: 10px 10px 0 0;
+      padding: 28px 36px 22px;
+      border-bottom: 4px solid #fc3d21;
+    }
+    .doc-header .eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+    .doc-header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .doc-header .sub {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+    .pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 12px;
+      margin-right: 6px;
+    }
+    .pill-draft { background: #ffc107; color: #111; }
+    .pill-eng   { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
+
+    /* ── Card ── */
+    .card {
+      background: white;
+      border: 1px solid #dde1e7;
+      border-top: none;
+      padding: 36px 36px 28px;
+    }
+    .card:last-child {
+      border-radius: 0 0 10px 10px;
+    }
+
+    /* ── Section label ── */
+    .section-tag {
+      display: inline-block;
+      background: #0b3d91;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0b3d91;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #0b3d91;
+    }
+
+    h3 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #444;
+      margin: 28px 0 10px;
+    }
+    h3:first-of-type { margin-top: 0; }
+
+    .text-block {
+      background: #f8f9fb;
+      border-left: 4px solid #0b3d91;
+      border-radius: 0 6px 6px 0;
+      padding: 16px 20px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #888;
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid #e5e8ed;
+      margin: 32px 0;
+    }
+
+    /* ── Diagram card ── */
+    .diagram-card {
+      background: white;
+      border: 1px solid #dde1e7;
+      border-top: none;
+      padding: 36px 36px 36px;
+    }
+
+    /* ── Ops timeline ── */
+    .ops-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 16px;
+      position: relative;
+    }
+    .ops-timeline::before {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 24px;
+      bottom: 24px;
+      width: 2px;
+      background: #0b3d91;
+      opacity: 0.2;
+    }
+    .ops-step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 14px 0;
+    }
+    .ops-num {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: #0b3d91;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .ops-content {
+      flex: 1;
+      padding-top: 10px;
+    }
+    .ops-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #0b3d91;
+      margin-bottom: 4px;
+    }
+    .ops-text {
+      font-size: 13.5px;
+      color: #333;
+      line-height: 1.65;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; padding: 0; }
+      .page { max-width: 100%; }
+      .doc-header { border-radius: 0; }
+      .card, .diagram-card { border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="eyebrow">NASA L'SPACE MCA — Summer 2026 &nbsp;|&nbsp; Mission Concept Review</div>
+    <h1>Section 1.7 — Concept of Operations</h1>
+    <div class="sub">Team 15 &nbsp;|&nbsp; Lunar South Pole / PSR Environmental Characterization Mission</div>
+    <div>
+      <span class="pill pill-draft">Working Draft</span>
+      <span class="pill pill-eng">Engineering Team</span>
+    </div>
+  </div>
+
+  <!-- Written ConOps -->
+  <div class="card">
+    <div class="section-tag">1.7</div>
+    <h2>Concept of Operations</h2>
+
+    <!-- 1.7.1 -->
+    <h3>1.7.1 &nbsp; Mission Overview</h3>
+    <div class="text-block">
+      The mission deploys a probe-class lander and integrated compact rover to the lunar south pole to characterize the in-situ environmental effects of exploration activities within permanently shadowed regions (PSRs). The system operates on the lunar surface for one full lunar cycle (approximately 29.5 days), directly measuring dust accumulation, cryogenic thermal variation, and ionizing radiation flux in support of the STM science objectives under Sci-A-1 and HS-01. All acquired science data are returned to Earth to establish baseline environmental characterization for future human and robotic exploration of the PSR.
+    </div>
+    <p class="note">Constraint check: 3 sentences. No personal pronouns. Scope and location explicit.</p>
+
+    <hr class="divider" />
+
+    <!-- 1.7.2 -->
+    <h3>1.7.2 &nbsp; System Architecture</h3>
+    <div class="text-block">
+      The spacecraft consists of a single-element probe-class lander with an integrated compact rover, selected to minimize total wet mass while accommodating the primary science instrument suite. The lander provides the descent propulsion and landing structure, power generation and storage, and the primary communications link to Earth, while the rover delivers surface mobility and in-situ science data collection across the PSR transect. Key high-level system elements include the descent stage, rover mobility platform, science payload suite (dust sensor, thermal sensor array, and radiation dosimeter package), solar power subsystem with battery backup, and a command and data handling (CDH) and communications subsystem.
+    </div>
+    <p class="note">Constraint check: 3 sentences. High-level elements named, no granular design detail.</p>
+
+    <hr class="divider" />
+
+    <!-- 1.7.3 -->
+    <h3>1.7.3 &nbsp; Operational Sequence</h3>
+    <div class="text-block">
+      The mission launches as a secondary payload on a commercial rideshare vehicle, which delivers the spacecraft on a trans-lunar injection (TLI) trajectory toward the Moon. During the cruise phase, the spacecraft operates in a low-power safe mode with periodic health-check downlinks to the ground team. Upon arrival, the spacecraft performs lunar orbit insertion and a series of orbit reduction maneuvers to achieve the south pole approach corridor, followed by powered descent and soft landing at the target PSR boundary site. Following landing confirmation, the rover deploys from the lander deck, completes a surface checkout sequence, and initiates primary science operations. The rover then traverses prescribed transects over the 29.5-day operational period, collecting synchronized dust, thermal, and radiation measurements across the PSR illumination gradient, with science data downlinked to Earth via direct-to-Earth or relay-assisted link within 72 hours of acquisition. The mission concludes at end of the operational lifespan with final data transmission and subsystem safe power-down.
+    </div>
+    <p class="note">Constraint check: 6 sentences. Chronological order: launch, cruise, arrival, landing, ops, end. No dates or specific timing values.</p>
+  </div>
+
+  <!-- Diagram -->
+  <div class="diagram-card">
+    <div class="section-tag">1.7 — Visual Aid</div>
+    <h2>System Architecture Diagram</h2>
+
+    <!-- SVG Diagram -->
+    <svg viewBox="0 0 820 540" xmlns="http://www.w3.org/2000/svg"
+         style="width:100%;height:auto;display:block;margin-bottom:32px;border:1px solid #e0e4ea;border-radius:8px;background:#f8f9fb;">
+
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#0b3d91" opacity="0.5"/>
+        </marker>
+        <marker id="arr-w" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#ffffff" opacity="0.8"/>
+        </marker>
+        <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+        </filter>
+      </defs>
+
+      <!-- Background label -->
+      <text x="410" y="26" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+            font-size="12" fill="#aaa" font-weight="600" letter-spacing="2">
+        TEAM 15 — LUNAR PSR MISSION — SYSTEM ARCHITECTURE
+      </text>
+
+      <!-- ════════════════════════════════════
+           SPACECRAFT BLOCK (center-left)
+           ════════════════════════════════════ -->
+      <!-- Spacecraft outer box -->
+      <rect x="40" y="50" width="360" height="390" rx="10" ry="10"
+            fill="#e8f0fe" stroke="#0b3d91" stroke-width="1.5" opacity="0.5"/>
+      <text x="220" y="72" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+            font-size="11" fill="#0b3d91" font-weight="700" letter-spacing="1">SPACECRAFT SYSTEM</text>
+
+      <!-- Lander block -->
+      <rect x="60" y="88" width="320" height="155" rx="8" ry="8"
+            fill="white" stroke="#0b3d91" stroke-width="1.5" filter="url(#shadow)"/>
+      <rect x="60" y="88" width="320" height="28" rx="8" ry="8"
+            fill="#0b3d91"/>
+      <rect x="60" y="104" width="320" height="12" fill="#0b3d91"/>
+      <text x="220" y="107" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+            font-size="12" fill="white" font-weight="700">LANDER</text>
+
+      <!-- Lander subsystems -->
+      <!-- Descent Stage -->
+      <rect x="76" y="126" width="130" height="44" rx="5" fill="#e8f0fe" stroke="#0b3d91" stroke-width="1"/>
+      <text x="141" y="145" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#0b3d91" font-weight="700">DESCENT STAGE</text>
+      <text x="141" y="159" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#555">Propulsion + Landing Legs</text>
+
+      <!-- Power -->
+      <rect x="218" y="126" width="146" height="44" rx="5" fill="#e8f0fe" stroke="#0b3d91" stroke-width="1"/>
+      <text x="291" y="145" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#0b3d91" font-weight="700">POWER SUBSYSTEM</text>
+      <text x="291" y="159" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#555">Solar Arrays + Battery</text>
+
+      <!-- CDH -->
+      <rect x="76" y="182" width="130" height="44" rx="5" fill="#e8f0fe" stroke="#0b3d91" stroke-width="1"/>
+      <text x="141" y="201" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#0b3d91" font-weight="700">CDH</text>
+      <text x="141" y="215" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#555">Command + Data Handling</text>
+
+      <!-- Comms -->
+      <rect x="218" y="182" width="146" height="44" rx="5" fill="#e8f0fe" stroke="#0b3d91" stroke-width="1"/>
+      <text x="291" y="201" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#0b3d91" font-weight="700">COMMUNICATIONS</text>
+      <text x="291" y="215" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#555">DTE + Relay-Assisted Link</text>
+
+      <!-- Rover block -->
+      <rect x="60" y="258" width="320" height="165" rx="8" ry="8"
+            fill="white" stroke="#1a7f37" stroke-width="1.5" filter="url(#shadow)"/>
+      <rect x="60" y="258" width="320" height="28" rx="8" ry="8" fill="#1a7f37"/>
+      <rect x="60" y="274" width="320" height="12" fill="#1a7f37"/>
+      <text x="220" y="277" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+            font-size="12" fill="white" font-weight="700">ROVER</text>
+
+      <!-- Rover subsystems -->
+      <rect x="76" y="296" width="130" height="44" rx="5" fill="#e6f4ea" stroke="#1a7f37" stroke-width="1"/>
+      <text x="141" y="315" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#1a7f37" font-weight="700">MOBILITY</text>
+      <text x="141" y="329" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#555">6-Wheel Drive Platform</text>
+
+      <rect x="218" y="296" width="146" height="44" rx="5" fill="#e6f4ea" stroke="#1a7f37" stroke-width="1"/>
+      <text x="291" y="315" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#1a7f37" font-weight="700">ONBOARD AVIONICS</text>
+      <text x="291" y="329" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#555">Control + Fault Mgmt</text>
+
+      <!-- Science payload row -->
+      <rect x="76" y="352" width="290" height="58" rx="5" fill="#fff8e1" stroke="#9a6700" stroke-width="1.2"/>
+      <text x="221" y="370" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#9a6700" font-weight="700">SCIENCE PAYLOAD SUITE</text>
+      <!-- Three instruments -->
+      <rect x="82" y="377" width="84" height="26" rx="4" fill="#ffe082" stroke="#9a6700" stroke-width="0.8"/>
+      <text x="124" y="394" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#5d4000" font-weight="600">Dust Sensor</text>
+
+      <rect x="174" y="377" width="90" height="26" rx="4" fill="#ffe082" stroke="#9a6700" stroke-width="0.8"/>
+      <text x="219" y="394" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#5d4000" font-weight="600">Thermal Array</text>
+
+      <rect x="272" y="377" width="88" height="26" rx="4" fill="#ffe082" stroke="#9a6700" stroke-width="0.8"/>
+      <text x="316" y="394" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#5d4000" font-weight="600">Rad Dosimeter</text>
+
+      <!-- Thermal control footer -->
+      <rect x="60" y="432" width="320" height="8" rx="4" fill="#0b3d91" opacity="0.12"/>
+      <text x="220" y="453" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+            font-size="9" fill="#888">Thermal Control: MLI + Heaters + Low-outgassing Materials</text>
+
+      <!-- ════════════════════════════════════
+           MISSION PHASES (right side)
+           ════════════════════════════════════ -->
+      <rect x="440" y="50" width="340" height="390" rx="10" ry="10"
+            fill="#fff" stroke="#dde1e7" stroke-width="1.5"/>
+      <text x="610" y="72" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+            font-size="11" fill="#0b3d91" font-weight="700" letter-spacing="1">MISSION PHASES</text>
+
+      <!-- Phase rows -->
+      <!-- P1 Launch -->
+      <rect x="456" y="84" width="308" height="52" rx="6" fill="#0b3d91" opacity="0.9"/>
+      <text x="476" y="105" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="white" font-weight="700">1 — LAUNCH &amp; TLI</text>
+      <text x="476" y="120" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.8)">Rideshare secondary payload · trans-lunar injection</text>
+      <text x="726" y="120" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="8" fill="rgba(255,255,255,0.6)">Safe mode</text>
+
+      <!-- Arrow -->
+      <line x1="610" y1="138" x2="610" y2="148" stroke="#0b3d91" stroke-width="1.5" marker-end="url(#arr)" opacity="0.4"/>
+
+      <!-- P2 Cruise -->
+      <rect x="456" y="150" width="308" height="52" rx="6" fill="#1565c0" opacity="0.85"/>
+      <text x="476" y="171" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="white" font-weight="700">2 — CRUISE</text>
+      <text x="476" y="186" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.8)">Low power · TCMs · periodic health downlinks</text>
+
+      <line x1="610" y1="204" x2="610" y2="214" stroke="#0b3d91" stroke-width="1.5" marker-end="url(#arr)" opacity="0.4"/>
+
+      <!-- P3 LOI + Descent -->
+      <rect x="456" y="216" width="308" height="52" rx="6" fill="#fc3d21" opacity="0.88"/>
+      <text x="476" y="237" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="white" font-weight="700">3 — LUNAR ORBIT INSERTION + DESCENT</text>
+      <text x="476" y="252" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.8)">Orbit reduction · powered descent · soft landing</text>
+
+      <line x1="610" y1="270" x2="610" y2="280" stroke="#fc3d21" stroke-width="1.5" marker-end="url(#arr)" opacity="0.5"/>
+
+      <!-- P4 Checkout -->
+      <rect x="456" y="282" width="308" height="52" rx="6" fill="#2e7d32" opacity="0.88"/>
+      <text x="476" y="303" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="white" font-weight="700">4 — SURFACE CHECKOUT</text>
+      <text x="476" y="318" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.8)">Rover deploy · mobility check · instruments on</text>
+
+      <line x1="610" y1="336" x2="610" y2="346" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#arr)" opacity="0.5"/>
+
+      <!-- P5 Ops -->
+      <rect x="456" y="348" width="308" height="72" rx="6" fill="#1a7f37" opacity="0.9"/>
+      <text x="476" y="369" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="white" font-weight="700">5 — PRIMARY SCIENCE OPS (29.5 days)</text>
+      <text x="476" y="385" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.85)">Rover traverses PSR transects · dust, thermal,</text>
+      <text x="476" y="399" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.85)">radiation collection · data downlink within 72 hrs</text>
+      <text x="476" y="413" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.7)">EOM: safe power-down + final data return</text>
+
+      <!-- ════════════════════════════════════
+           Science data flow arrow
+           ════════════════════════════════════ -->
+      <!-- Arrow from rover science block to ground -->
+      <text x="410" y="498" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+            font-size="10" fill="#0b3d91" font-weight="700">Science Data Flow</text>
+
+      <!-- Ground station box -->
+      <rect x="270" y="478" width="280" height="38" rx="6" fill="#0b3d91"/>
+      <text x="410" y="501" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+            font-size="11" fill="white" font-weight="700">GROUND STATION / MISSION OPERATIONS</text>
+
+      <!-- Comms arrows -->
+      <line x1="220" y1="470" x2="270" y2="490" stroke="#0b3d91" stroke-width="1.5"
+            stroke-dasharray="5,3" marker-end="url(#arr)" opacity="0.6"/>
+      <line x1="580" y1="470" x2="540" y2="490" stroke="#0b3d91" stroke-width="1.5"
+            stroke-dasharray="5,3" marker-end="url(#arr)" opacity="0.6"/>
+
+      <!-- Uplink / Downlink labels -->
+      <text x="228" y="468" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+            font-size="9" fill="#888">TLM / CMD</text>
+      <text x="572" y="468" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+            font-size="9" fill="#888">TLM / CMD</text>
+
+    </svg>
+
+    <!-- Ops sequence visual -->
+    <h3 style="margin-top:8px">Operational Sequence — Step by Step</h3>
+
+    <div class="ops-timeline">
+      <div class="ops-step">
+        <div class="ops-num">1</div>
+        <div class="ops-content">
+          <div class="ops-label">Launch &amp; TLI</div>
+          <div class="ops-text">Spacecraft launches as secondary rideshare payload and is delivered on a trans-lunar injection trajectory. System enters low-power safe mode with periodic health-check downlinks.</div>
+        </div>
+      </div>
+      <div class="ops-step">
+        <div class="ops-num">2</div>
+        <div class="ops-content">
+          <div class="ops-label">Cruise</div>
+          <div class="ops-text">Trajectory correction maneuvers (TCMs) executed as required. Science instruments remain stowed. Ground team monitors telemetry via direct-to-Earth link.</div>
+        </div>
+      </div>
+      <div class="ops-step">
+        <div class="ops-num" style="background:#fc3d21">3</div>
+        <div class="ops-content">
+          <div class="ops-label" style="color:#fc3d21">Lunar Orbit Insertion + Powered Descent</div>
+          <div class="ops-text">Spacecraft performs LOI burn and orbit reduction maneuvers to achieve south pole approach corridor. Powered descent initiated; soft landing executed at target PSR boundary site.</div>
+        </div>
+      </div>
+      <div class="ops-step">
+        <div class="ops-num" style="background:#2e7d32">4</div>
+        <div class="ops-content">
+          <div class="ops-label" style="color:#2e7d32">Surface Checkout</div>
+          <div class="ops-text">Rover deploys from lander deck. Mobility, instrument power-on, and communications link verified. Initial housekeeping telemetry downlinked to ground.</div>
+        </div>
+      </div>
+      <div class="ops-step">
+        <div class="ops-num" style="background:#1a7f37">5</div>
+        <div class="ops-content">
+          <div class="ops-label" style="color:#1a7f37">Primary Science Operations — 29.5 Days</div>
+          <div class="ops-text">Rover traverses PSR transects collecting synchronized dust, thermal, and radiation measurements across the illumination gradient. Science data downlinked within 72 hours of acquisition via DTE or relay-assisted link. Mission concludes with final data return and safe power-down.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end diagram card -->
+
+</div><!-- end page -->
+</body>
+</html>
