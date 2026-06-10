@@ -1,0 +1,203 @@
+% ============================================================
+%  NASA L'SPACE MCA SU26 — Team 15
+%  Section 1.7: Concept of Operations
+%  Compile: pdflatex section-1-7-conops.tex
+% ============================================================
+\documentclass[11pt]{article}
+
+% --- Layout ---
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- Font: Helvetica (closest to Open Sans in standard TeX) ---
+\usepackage[scaled=0.95]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% --- Spacing and typography ---
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.15}
+\usepackage{parskip}
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+
+% --- Tables ---
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\definecolor{nasa}{HTML}{0a2d6e}
+\definecolor{rowgray}{HTML}{f5f5f5}
+
+% --- Section formatting ---
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\normalsize\bfseries\color{nasa}\MakeUppercase}
+  {}{0pt}{}[\vspace{2pt}\titlerule[0.4pt]\vspace{4pt}]
+\titlespacing*{\section}{0pt}{10pt}{6pt}
+
+\titleformat{\subsection}[block]
+  {\normalfont\small\bfseries}
+  {}{0pt}{}
+\titlespacing*{\subsection}{0pt}{8pt}{3pt}
+
+% --- Diagram ---
+\usepackage{tikz}
+\usetikzlibrary{positioning, fit, shapes.geometric, arrows.meta}
+
+\tikzset{
+  sysbox/.style={
+    draw=nasa, fill=nasa!5, minimum width=2.8cm, minimum height=0.7cm,
+    font=\fontsize{6.5}{7}\selectfont\bfseries, align=center,
+    inner sep=3pt
+  },
+  paybox/.style={
+    draw=nasa!50!black!60, fill=yellow!10, minimum width=2.6cm,
+    minimum height=0.6cm, font=\fontsize{6.5}{7}\selectfont, align=center,
+    inner sep=2pt
+  },
+  phasebox/.style={
+    draw=nasa, fill=nasa!8, minimum width=4.6cm, minimum height=0.55cm,
+    font=\fontsize{6.5}{7}\selectfont\bfseries, align=left,
+    inner sep=4pt, text width=4.2cm
+  },
+  landbox/.style={
+    draw=nasa, fill=nasa!15, minimum width=0.5cm, minimum height=0.5cm,
+    font=\fontsize{6}{6.5}\selectfont, align=center
+  },
+  groupbox/.style={
+    draw=nasa, thick, inner sep=6pt
+  },
+  arr/.style={->, >=Stealth, thin, gray!70}
+}
+
+% --- Header/footer ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\fontsize{8}{9}\selectfont\color{gray}
+  NASA L'SPACE MCA SU26 \enspace|\enspace Team 15 \enspace|\enspace
+  Section 1.7 — Concept of Operations}
+\fancyhead[R]{\fontsize{8}{9}\selectfont\color{gray}Working Draft}
+\fancyfoot[C]{\fontsize{8}{9}\selectfont\color{gray}\thepage}
+
+% ============================================================
+\begin{document}
+
+% ── Document title block ──────────────────────────────────
+\vspace*{-6pt}
+{\fontsize{8}{10}\selectfont\color{gray}\texttt{%
+  Mission: L'SPACE MCA SU26 \quad Team: 15 — Engineering \quad
+  Section: 1.7 — Concept of Operations \quad Date: June 2026}}
+\vspace{4pt}
+
+{\fontsize{18}{20}\selectfont\bfseries Section 1.7 — Concept of Operations}
+\vspace{1pt}
+
+{\small\color{gray} Lunar South Pole / PSR Environmental Characterization Mission}
+
+\vspace{4pt}\noindent\rule{\textwidth}{1pt}\vspace{2pt}
+
+% ── 1.7 ──────────────────────────────────────────────────
+\section{1.7 \quad Concept of Operations}
+
+% ── 1.7.1 ─────────────────────────────────────────────────
+\subsection{1.7.1 \quad Mission Overview}
+
+The mission deploys a probe-class lander and integrated compact rover to the lunar south pole to characterize the in-situ environmental effects of exploration activities within permanently shadowed regions (PSRs). The system operates on the lunar surface for one full lunar cycle (approximately 29.5 days), directly measuring dust accumulation, cryogenic thermal variation, and ionizing radiation flux in support of the science objectives under Sci-A-1 and HS-01. All acquired science data are returned to Earth to establish baseline environmental characterization for future human and robotic exploration of the PSR.
+
+\vspace{4pt}
+% ── 1.7.2 ─────────────────────────────────────────────────
+\subsection{1.7.2 \quad System Architecture}
+
+The spacecraft consists of a single-element probe-class lander with an integrated compact rover, selected to minimize total wet mass while accommodating the primary science instrument suite. The lander provides descent propulsion and landing structure, power generation and storage, and the primary communications link to Earth, while the rover delivers surface mobility and in-situ science data collection across the PSR transect. Key high-level system elements include the descent stage, rover mobility platform, science payload suite (dust sensor, thermal sensor array, and radiation dosimeter package), solar power subsystem with battery backup, and a command and data handling (CDH) and communications subsystem.
+
+\vspace{4pt}
+
+% ── Architecture diagram ───────────────────────────────────
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[node distance=0.22cm and 0.3cm]
+
+  %% ── Lander subsystems ────────────────────────────
+  \node[sysbox] (descent) {DESCENT STAGE\\[-1pt]\fontsize{5.5}{6}\selectfont\mdseries Propulsion + Landing Legs};
+  \node[sysbox, right=0.25cm of descent] (power) {POWER\\[-1pt]\fontsize{5.5}{6}\selectfont\mdseries Solar Arrays + Battery};
+  \node[sysbox, below=0.22cm of descent] (cdh) {CDH\\[-1pt]\fontsize{5.5}{6}\selectfont\mdseries Command + Data Handling};
+  \node[sysbox, below=0.22cm of power] (comms) {COMMUNICATIONS\\[-1pt]\fontsize{5.5}{6}\selectfont\mdseries DTE + Relay Link};
+
+  \node[groupbox, fit=(descent)(power)(cdh)(comms), label={[font=\fontsize{7}{8}\selectfont\bfseries\color{nasa}]above:LANDER}] (lander) {};
+
+  %% ── Rover subsystems ─────────────────────────────
+  \node[sysbox, below=0.55cm of cdh] (mob) {MOBILITY\\[-1pt]\fontsize{5.5}{6}\selectfont\mdseries Wheeled Drive Platform};
+  \node[sysbox, right=0.25cm of mob] (avio) {AVIONICS\\[-1pt]\fontsize{5.5}{6}\selectfont\mdseries Control + Fault Mgmt};
+
+  \node[paybox, below=0.22cm of mob, xshift=1.55cm] (pay) {%
+    \textbf{SCIENCE PAYLOAD SUITE} \quad
+    Dust Sensor \enspace|\enspace Thermal Array \enspace|\enspace Rad Dosimeter};
+
+  \node[groupbox, draw=green!40!black, fit=(mob)(avio)(pay),
+        label={[font=\fontsize{7}{8}\selectfont\bfseries, text=green!40!black]above:ROVER}] (rover) {};
+
+  %% ── Mission phases ────────────────────────────────
+  \node[phasebox, right=1.0cm of power, yshift=-0.05cm] (p1)
+    {1 — LAUNCH \& TLI\\[-0.5pt]\fontsize{5.5}{6}\selectfont\mdseries\color{black!70}
+     Rideshare secondary payload · trans-lunar injection};
+  \node[phasebox, below=0.18cm of p1] (p2)
+    {2 — CRUISE\\[-0.5pt]\fontsize{5.5}{6}\selectfont\mdseries\color{black!70}
+     Low-power safe mode · TCMs · health downlinks};
+  \node[phasebox, below=0.18cm of p2] (p3)
+    {3 — LOI + POWERED DESCENT\\[-0.5pt]\fontsize{5.5}{6}\selectfont\mdseries\color{black!70}
+     Orbit reduction · descent burn · soft landing};
+  \node[phasebox, below=0.18cm of p3] (p4)
+    {4 — SURFACE CHECKOUT\\[-0.5pt]\fontsize{5.5}{6}\selectfont\mdseries\color{black!70}
+     Rover deploy · instruments on · comms verify};
+  \node[phasebox, fill=green!8, draw=green!40!black, below=0.18cm of p4] (p5)
+    {5 — PRIMARY OPS (29.5 days)\\[-0.5pt]\fontsize{5.5}{6}\selectfont\mdseries\color{black!70}
+     PSR transects · dust/thermal/radiation · downlink $\leq$72 hrs};
+
+  \node[groupbox, draw=black!30, fit=(p1)(p2)(p3)(p4)(p5),
+        label={[font=\fontsize{7}{8}\selectfont\bfseries, text=black!50]above:MISSION PHASES}] {};
+
+  %% ── Phase arrows ─────────────────────────────────
+  \draw[arr] (p1.south) -- (p2.north);
+  \draw[arr] (p2.south) -- (p3.north);
+  \draw[arr] (p3.south) -- (p4.north);
+  \draw[arr] (p4.south) -- (p5.north);
+
+  %% ── Ground segment note ──────────────────────────
+  \node[draw=black!25, fill=gray!5, font=\fontsize{6}{6.5}\selectfont,
+        align=center, inner sep=3pt,
+        below=0.4cm of pay, xshift=1.0cm] (gnd)
+    {Ground / Mission Ops\\[-1pt]\fontsize{5}{5.5}\selectfont\color{gray} TLM $\downarrow$ \enspace CMD $\uparrow$};
+  \draw[arr, dashed] (comms.south) -- ++(0,-0.3) -| (gnd.north);
+  \draw[arr, dashed] (pay.south)   -- ++(0,-0.2) -| (gnd.north);
+
+\end{tikzpicture}
+\caption*{\fontsize{8}{9}\selectfont\color{gray}\textit{Figure 1.7-1. System architecture and mission phase overview.}}
+\end{figure}
+
+% ── 1.7.3 ─────────────────────────────────────────────────
+\subsection{1.7.3 \quad Operational Sequence}
+
+The mission launches as a secondary payload on a commercial rideshare vehicle, which delivers the spacecraft on a trans-lunar injection trajectory; during cruise the system operates in a low-power safe mode with periodic health-check downlinks. Upon arrival the spacecraft performs lunar orbit insertion and orbit reduction to achieve the south pole approach corridor, followed by powered descent and soft landing at the target PSR site. Following landing confirmation, the rover deploys from the lander deck and completes a surface checkout sequence before initiating primary science operations. The rover traverses prescribed transects over 29.5 days, collecting synchronized dust, thermal, and radiation measurements, with all data downlinked within 72 hours via direct-to-Earth or relay-assisted link. The mission concludes with a final data transmission and subsystem safe power-down.
+
+\vspace{4pt}
+
+% ── Ops table ─────────────────────────────────────────────
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries\footnotesize}p{2.0cm}@{\hspace{8pt}}>{\footnotesize}X@{}}
+\toprule
+\normalfont\bfseries\footnotesize Phase & \normalfont\bfseries\footnotesize Description \\
+\midrule
+Launch / TLI   & Rideshare secondary payload. Trans-lunar injection trajectory. System in low-power safe mode; periodic health-check downlinks. \\
+Cruise         & Trajectory correction maneuvers as required. Instruments stowed. Ground team monitors telemetry via direct-to-Earth link. \\
+LOI + Descent  & Lunar orbit insertion. Orbit reduction to south pole approach corridor. Powered descent and soft landing at target PSR site. \\
+Checkout       & Rover deployment. Mobility, instrument power-on, and comms link verified. Housekeeping telemetry downlinked. \\
+Primary Ops    & 29.5-day PSR transect campaign. Dust, thermal, and radiation data collected. Downlink within 72 hrs via DTE or relay. Autonomous safe-mode during blackouts. \\
+End of Mission & Final data transmission. Subsystem safe power-down. Mission closure documentation delivered to science team. \\
+\bottomrule
+\end{tabularx}
+
+\end{document}
