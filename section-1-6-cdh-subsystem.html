@@ -201,14 +201,14 @@
     </div>
     <div class="doc-title">NASA L'SPACE Mission Concept Review</div>
     <div class="doc-heading">Section 1.6 — CDH Subsystem Selection Criteria</div>
-    <div class="doc-sub">Lunar South Pole / PSR Environmental Characterization Mission</div>
+    <div class="doc-sub">CDH engineering role, grounded in the Team 15 Brain mission notes and STM-derived hazards</div>
   </div>
 
   <div class="doc-body">
     <div class="section">
       <div class="section-heading">1.6 &nbsp; CDH Subsystem Selection Criteria</div>
       <p>
-        The CDH subsystem shall be selected on the basis of whether it can preserve command authority, safeguard science data, and recover autonomously through the lunar south pole PSR environment using only the evidence collected so far. The current evidence set points to three hard drivers: radiation-driven upset risk in avionics, intermittent or delayed communications, and low-power survival and operations across the 29.5-day surface campaign. Because the mission depends on reliable packet handling, onboard storage, fault management, and downlink closure, the evaluation must emphasize command integrity and data continuity over raw subsystem feature count. Any unverified numerical threshold shall remain `[TBR]` until it is backed by the mission baseline or a formal analysis.
+        The CDH subsystem shall be selected on the basis of whether it can preserve command authority, safeguard science data, and recover autonomously through the lunar south pole PSR environment using only the Brain-derived evidence already collected for Team 15. The working evidence set is narrow and specific: radiation-driven upset risk in avionics, intermittent or delayed communications, low-power survival and operations across the 29.5-day surface campaign, and the need to return primary science data within 72 hours of acquisition when a link is available. Because the mission depends on reliable packet handling, onboard storage, fault management, and downlink closure, the evaluation must emphasize command integrity and data continuity over raw subsystem feature count. Any unverified numerical threshold shall remain `[TBR]` until it is backed by the mission baseline or a formal analysis.
       </p>
 
       <div class="subsection">
@@ -225,17 +225,17 @@
             <tr>
               <td class="criterion">Command integrity</td>
               <td class="decision">Preserve command authorization, execution, and acknowledgment through cruise, descent, checkout, and PSR operations.</td>
-              <td class="evidence">The current mission concept already requires autonomous fault response and safe-mode transition under blackout conditions.</td>
+              <td class="evidence">Brain evidence: cruise operations require autonomous fault response and safe-mode transition under blackout conditions.</td>
             </tr>
             <tr>
               <td class="criterion">Data continuity</td>
               <td class="decision">Buffer, packetize, protect, and return science data without loss when link access is intermittent or delayed.</td>
-              <td class="evidence">The current concept requires downlink within 72 hours of acquisition via direct-to-Earth or relay.</td>
+              <td class="evidence">Brain evidence: primary science data return is required within 72 hours via direct-to-Earth or relay.</td>
             </tr>
             <tr>
               <td class="criterion">Environmental tolerance</td>
               <td class="decision">Remain functional through PSR thermal extremes, radiation upsets, dust exposure, and launch or landing shock.</td>
-              <td class="evidence">Collected hazards identify TID risk, thermal cycling, dust contamination, and structural shock.</td>
+              <td class="evidence">Brain evidence: TID risk, thermal cycling, dust contamination, and structural shock are already captured as mission hazards.</td>
             </tr>
           </tbody>
         </table>
@@ -297,7 +297,7 @@
             <tr>
               <td class="criterion">Thermal, radiation, and dust</td>
               <td>Assess heat dissipation, shielding, part tolerance, contamination sensitivity, and degradation mechanisms in PSR conditions.</td>
-              <td class="evidence">Thermal survival and radiation robustness are first-order CDH trades.</td>
+              <td class="evidence">Thermal survival and radiation robustness are first-order CDH trades from the Brain notes.</td>
             </tr>
           </tbody>
         </table>
@@ -317,7 +317,7 @@
             <tr>
               <td class="criterion">Reliability and fault containment</td>
               <td>Prefer architectures with watchdogs, safe modes, EDAC, and explicit recovery paths for comms loss or processor upset.</td>
-              <td class="evidence">The mission already requires autonomous fault response when real-time command is unavailable.</td>
+              <td class="evidence">Brain evidence: autonomous fault response is required when real-time command is unavailable.</td>
             </tr>
             <tr>
               <td class="criterion">TRL and heritage</td>
@@ -335,7 +335,7 @@
 
       <div class="note">
         <span class="tag">Selection rule</span><br>
-        When two candidate CDH architectures satisfy the same mission requirements, choose the one with lower verified power per delivered bit, stronger fault containment, simpler verification, and higher environmental maturity. Where the mission baseline has not yet fixed a number, carry it as `[TBR]` rather than inventing a threshold.
+        When two candidate CDH architectures satisfy the same mission requirements, choose the one with lower verified power per delivered bit, stronger fault containment, simpler verification, and higher environmental maturity. Where the mission baseline has not yet fixed a number, carry it as `[TBR]` rather than inventing a threshold. This page is intentionally limited to CDH engineering tradeoffs and the Team 15 evidence already captured in Brain.
       </div>
     </div>
   </div>
